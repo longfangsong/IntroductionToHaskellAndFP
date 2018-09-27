@@ -448,11 +448,11 @@ foldl (+) 0 (filter (<10) (map (*3) [1,2,3,4,5]))
 
 - Eq类型类
 
-  可判断相等性的类型，要求类型实现了`==`和`/=`两个函数[^4]。
+  可判断相等性的类型，实现了`==`和`/=`两个函数[^11]。
 
 - Ord类型类
 
-  可比较大小的类型，要求类型实现了`compare`。
+  可比较大小的类型，实现了`compare`。
 
 - Show类型类
 
@@ -593,7 +593,7 @@ class Applicative m => Monad m where
 同样看`Maybe`：
 
 ```haskell
-class Applicative Maybe => Monad Maybe where
+instance Monad Maybe where
     return :: a -> Maybe a
     (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
 ```
@@ -621,7 +621,9 @@ Nothing
 
 ![monad_chain](http://blog.leichunfeng.com/images/monad_chain.png)
 
-另外，monad的另外一个用法是用来实现函数式编程中那些不得不有的状态，比如IO monad和随机数monad（返回包裹在“随机数生成器状态”上下文中的随机数，Ouch，真难看），这不是函数式编程中好的那一部分，所以我不讲。
+熟悉前端的同学可能就发现了，我们常常用的Promise就是一个Monad，而Promise里的`then`就是这里的`>>=`。
+
+另外，monad的另外一个用法是用来实现函数式编程中那些不得不有的状态，比如IO monad和随机数monad（同时返回一个随机数和一个新的随机数生成器，或者将随机数包裹在IO monad里面，Ouch，真难看），这不是函数式编程中好的那一部分，所以我不讲。
 
 ## 从函数式编程到函数式架构
 
@@ -694,3 +696,4 @@ Nothing
 [^8]: `Functor`、`Applicative`和`Monad`的部分介绍和图片来自[这里](http://blog.leichunfeng.com/blog/2015/11/08/functor-applicative-and-monad/)
 [^9]: 记得吗，一个类或者模块应该有且只有一个改变的原因（SRP），开发过程和程序的运行过程中的最佳实践其实也是相通的啊。
 [^10]: 当然，MVVM、Flux和Redux各个层之间的通信要靠各种不同的方法，比如Rx等。
+[^11]: 实际上要求实现的函数和这里写的不太一样，这里举的是使用过程中常见的函数，具体见`:i`的结果

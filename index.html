@@ -14,7 +14,7 @@
         <div class="step" data-x="0" data-y="0" data-z="0" data-scale="5">
             <h1>Haskell与函数式编程</h1>
         </div>
-        <div class="step" data-x="-1000" data-y="-1000" data-z="10000" data-scale="1">
+        <div class="step" data-x="-700" data-y="-500" data-z="10000" data-scale="1">
             <iframe src="https://zh.wikipedia.org/wiki/函數程式語言"></iframe>
         </div>
         <div class="step text-center prism" id="PP" data-x="-5000" data-y="-6000" data-z="0" data-scale="1">
@@ -29,7 +29,7 @@
         <div class="step text-center prism" id="FP" data-x="-4875" data-y="-6000" data-z="-220" data-rotate-y="-240"
             data-scale="1">
             <h2>函数式编程思想</h2>
-            <img src="./outline/FP.svg" width="300" />
+            <img src="./outline/FP.svg" width="200" />
         </div>
         <div class="step text-center" id="para-overview" data-x="-5000" data-y="-6000" data-z="0" data-scale="2">
         </div>
@@ -43,7 +43,7 @@
                 <li>函数是”一等公民”，每个函数都是一个值，有其类型，能作为其他函数的参数</li>
             </ul>
         </div>
-        <div class="step" data-x="7000" data-y="0" data-z="0" data-scale="1">
+        <div class="step" data-x="5000" data-y="0" data-z="0" data-scale="1">
             <ul>
                 <li>惰性求值</li>
                 <li>静态强类型</li>
@@ -89,12 +89,109 @@ g x y <span class="comment">-- g(x,y)</span>
             <h2>curry化函数</h2>
             <h2>Hindley-Milner类型签名</h2>
         </div>
-        <div class="step future-hidden" data-x="5000" data-y="-1000" data-z="-3000" data-scale="1">
-            <h2>curry化函数</h2>
-            <h2>Hindley-Milner类型签名</h2>
-        </div>
-        <div class="step future-hidden" data-x="5000" data-y="-2000" data-z="-3000" data-scale="1">
+        <div class="step future-hidden" data-x="6000" data-y="-2000" data-z="-3000" data-scale="1">
             <pre><code><span class="function">length</span> :: <span class="typeclass">Floating</span> <span class="type">a</span> => (<span class="type">a</span> -> (<span class="type">a</span> -> (<span class="type">a</span>)))</code></pre>
+        </div>
+        <div class="step" data-x="6000" data-y="-3000" data-z="-3000" data-scale="1">
+            <h2>高阶函数</h2>
+        </div>
+        <div class="step" data-x="-6000" data-y="-3000" data-z="-3000" data-scale="1">
+            <ul>
+                <li><code>Eq</code></li>
+                <li><code>Ord</code></li>
+                <li><code>Show</code></li>
+                <li><code>Read</code></li>
+                <li><code>Enum</code></li>
+                <li><code>Bounded</code></li>
+                <li><code>Num</code></li>
+                <li><code>Floating</code></li>
+                <li><code>Integeral</code></li>
+            </ul>
+        </div>
+        <div class="step" data-x="-6000" data-y="-1000" data-z="-3000" data-scale="1">
+            <iframe src="https://zh.wikipedia.org/wiki/函子"></iframe>
+        </div>
+        <div class="step" data-x="-6000" data-y="0" data-z="-3000" data-scale="1">
+            <pre><code>instance <span class="typeclass">Functor</span> [] where
+    <span class="function">fmap</span> = <span class="function">map</span></code>
+            </pre>
+        </div>
+        <div class="step" data-x="-6000" data-y="600" data-z="-3000" data-scale="1">
+            <pre><code>instance <span class="typeclass">Functor</span> <span class="type">Maybe</span> where
+    <span class="function">fmap</span> func (Just x) = Just (func x)
+    <span class="function">fmap</span> func Nothing  = Nothing</code>
+            </pre>
+        </div>
+        <div class="step" data-x="-6000" data-y="1200" data-z="-3000" data-scale="1">
+            <pre><code>instance <span class="typeclass">Applicative</span> <span class="type">Maybe</span> where
+    <span class="function">pure</span> = Just
+    Nothing <span class="function">&lt;*&gt;</span> _ = Nothing
+    (Just func) <span class="function">&lt;*&gt;</span> something = 
+        <span class="function">fmap</span> func something</code></pre>
+        </div>
+        <div class="step" data-x="-6000" data-y="1800" data-z="-3000" data-scale="1">
+            <pre><code>instance <span class="typeclass">Monad</span> <span class="type">Maybe</span> where
+    <span class="function">return</span> :: a -> Maybe a
+    <span class="function">(>>=)</span> :: Maybe a -> (a -> Maybe b)
+        -> Maybe b</code></pre>
+        </div>
+        <div class="step" data-x="0" data-y="1800" data-z="-3000" data-scale="1">
+            <ul>
+                <li>“可变的”、“副作用”是不好的</li>
+                <li>数据>>函数>>函数>>函数 = 程序的结果</li>
+            </ul>
+        </div>
+        <div class="step" data-x="0" data-y="-1800" data-z="-3000" data-scale="1">
+            <h2>MVVM</h2>
+            <ul>
+                <li> “领域层” —— VM层 </li>
+                <li> render函数——由MVVM框架负责提供。</li>
+                <li> 用户行为——是指用户修改了VM层的数据 </li>
+            </ul>
+        </div>
+        <div class="step" data-x="0" data-y="2800" data-z="-3000" data-scale="1">
+            <h2>Flux</h2>
+            <ul>
+                <li>"领域层"——Store</li>
+                <li>render函数——自己提供</li>
+                <li>Action——就是Action</li>
+            </ul>
+            <img src="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016011503.png">
+        </div>
+        <div class="step" data-x="0" data-y="2800" data-z="-3000" data-scale="1">
+            <h2>Flux</h2>
+            <ul>
+                <li>"领域层"——Store</li>
+                <li>render函数——自己提供</li>
+                <li>Action——就是Action</li>
+            </ul>
+            <img src="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016011503.png">
+        </div>
+        <div class="step" data-x="2000" data-y="2800" data-z="-3000" data-scale="1">
+            <h2>Redux</h2>
+            <ul>
+                <li>单一的Store</li>
+                <li><code>(state, action) => state</code></li>
+            </ul>
+        </div>
+        <div class="step" data-x="2000" data-y="-2800" data-z="-3000" data-scale="1">
+            <h2>推荐书目和网页</h2>
+            <ul>
+                <li>《Haskell趣学指南》</li>
+                <li>《SICP》</li>
+                <li><a href="http://blog.leichunfeng.com/blog/2015/11/08/functor-applicative-and-monad/">Functor、Applicative
+                        和 Monad</a></li>
+                <li><a href="http://www.ruanyifeng.com/blog/2016/01/flux.html">Flux 架构入门教程</a></li>
+            </ul>
+        </div>
+        <div class="step" data-x="2000" data-y="-2200" data-z="-3000" data-scale="1">
+            <h2>推荐相关库与框架</h2>
+            <ul>
+                <li href="http://reactivex.io">Rx系列</li>
+                <li href="https://facebook.github.io/flux/">flux</li>
+                <li href="http://www.redux.org.cn">redux</li>
+                <li href="https://vuex.vuejs.org">Vuex</li>
+            </ul>
         </div>
         <div class="step" id="overview" data-x="0" data-y="0" data-z="0" data-scale="16">
         </div>
