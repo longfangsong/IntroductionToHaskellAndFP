@@ -218,12 +218,12 @@ $$
 多个参数：
 
 ```haskell
-length x y = sqrt (x * x + y * y)
+distance x y = sqrt (x * x + y * y)
 ```
 
 也很像数学中的函数：
 $$
-length(x,y) = sqrt(x*x+y*y)
+distance(x,y) = sqrt(x*x+y*y)
 $$
 如果函数要分类讨论，可以使用“模式匹配”等技巧，它们在函数式编程中替代了逻辑判断：
 
@@ -341,7 +341,7 @@ Oh……这都是什么玩意[^5]。
 我们前面说过Haskell中的函数可以带多个参数：
 
 ```haskell
-length x y = sqrt (x * x + y * y)
+distance x y = sqrt (x * x + y * y)
 ```
 
 但是我实际上，我要说，所有的Haskell函数都只接受一个参数，返回一个值。
@@ -395,10 +395,10 @@ Floating a => a -> a
 一个好处是容易创建偏函数：
 
 ```haskell
-length x y = sqrt (x * x + y * y)
-f = length 2
-f 3 -- 即length 2 3
-f 4 -- 即length 2 4
+distance x y = sqrt (x * x + y * y)
+f = distance 2
+f 3 -- 即distance 2 3
+f 4 -- 即distance 2 4
 (*3) -- 返回参数乘3的结果的函数，下面将高阶函数里会用到
 (<10) -- 判断参数是否<10的函数
 ```
